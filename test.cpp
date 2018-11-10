@@ -29,7 +29,17 @@ int main(){
 	} 
 
 	// adjacency graph built now it's dumb lit
-	// okay now lets get this bread with the normal sequential algorithm
+	// okay fam lets get this bread with the normal sequential algorithm
+
 
 	return 0;
+}
+
+void primMST(int graph[][]){
+
+}
+
+void printMST(int n, int graph[][], int parent[]){
+	cout << " Edge \t Weight\n";
+	for(int i = 1)
 }
