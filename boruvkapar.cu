@@ -35,6 +35,7 @@ void populateSegments(vector<Edge> edges) {
 		}
 		seg->adjList.push_back(*it);
 		segmentOwner[it->src] = seg;
+		segments.push_back(seg);
 		if (segmentOwner.find(it->dest) == segmentOwner.end()) {
 			seg = new Segment();
 		} else {
@@ -42,13 +43,24 @@ void populateSegments(vector<Edge> edges) {
 		}
 		seg->adjList.push_back(*it);
 		segmentOwner[it->src] = seg;
+		segments.push_back(seg);
 	}
 }
 
 void boruvkaParallel(vector<Edge> edges) {
     int V = graph->V, E = graph->E;
 
-    populateSegments(edges)
+	populateSegments(edges)
+	
+	int numSegments = segments.size();
 
-    int *cheapest = new int[]
+	int *cheapest = new int[numSegments];
+	
+	// TODO: Start loop
+		// Iterate over segments (one thread each)
+		// Add cheapest edge to mst
+		// Set owner to the segment of the lower index member (atomic)
+		// Merge adjacency lists
+		// Get rid of old segments
+		// Update numSegments
 }
