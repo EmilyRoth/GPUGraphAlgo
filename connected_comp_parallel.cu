@@ -64,5 +64,16 @@ void cc_para(int** adj_lists, int size, int* list_sizes) {
 }
 
 int main() {
+    int * adj_lists[3];
+    int list0[0] = [];
+    int list1[1] = [2];
+    int list2[2] = [1]; 
+    adj_lists[0] = list0;
+    adj_lists[1] = list1;
+    adj_lists[2] = list2;
 
+    int size = 3;
+    int sizes[3] = {0, 1, 1};
+
+    cc_para(adj_lists, size, sizes);
 }
