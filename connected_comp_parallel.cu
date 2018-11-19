@@ -114,6 +114,30 @@ void cc_para(int* adj_lists, int size, int* list_sizes) {
     free(labels); free(changed);
 }
 
+int populate_array(vector<int>* arr, int* len) {
+    ifstream infile( "inp.txt" );
+    if (!infile.is_open()) {
+        cout<<"File failed to open"<<endl;
+        return 0;
+    }
+    string line;
+    while (getline(infile, line))
+    {
+        istringstream ss(line);
+        while (ss)
+        {
+            string s;
+            if (!getline(ss, s, ',')) break;
+
+            (*len)++;
+            arr->push_back(atoi(s.c_str()));
+
+        }
+    }
+    return 1;
+}
+
+
 int main() {
     // int * adj_lists[3];
     // int* list0;
