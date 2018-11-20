@@ -2,6 +2,11 @@
 #include <fstream>
 #include <iostream>
 #include <stdlib.h>
+#include "vector"
+#include <sstream>
+#include <string>
+using namespace std;
+
 
 using namespace std;
 
@@ -136,7 +141,6 @@ int populate_array(vector<int>* arr, int* len) {
     }
     return 1;
 }
-
 
 int main() {
     // int * adj_lists[3];
