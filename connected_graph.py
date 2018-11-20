@@ -3,8 +3,16 @@ import plotly.graph_objs as go
 
 import networkx as nx
 
-G=nx.random_geometric_graph(200,0.125)
-pos=nx.get_node_attributes(G,'pos')
+group_file = open("cuda_output.group","r")
+node_groups = group_file.read()
+print(node_groups)
+node_groups = node_groups.rstrip().split(" ")
+
+G = nx.read_adjlist("cuda_output.adjlist")
+pos=nx.fruchterman_reingold_layout(G)
+print(pos)
+nx.set_node_attributes(G,pos,'pos')
+#pos=nx.get_node_attributes(G,'pos')
 
 dmin=1
 ncenter=0
@@ -15,7 +23,7 @@ for n in pos:
         ncenter=n
         dmin=d
 
-p=nx.single_source_shortest_path_length(G,ncenter)
+#p=nx.single_source_shortest_path_length(G,ncenter)
 
 edge_trace = go.Scatter(
     x=[],
@@ -42,10 +50,10 @@ node_trace = go.Scatter(
         #'Greys' | 'YlGnBu' | 'Greens' | 'YlOrRd' | 'Bluered' | 'RdBu' |
         #'Reds' | 'Blues' | 'Picnic' | 'Rainbow' | 'Portland' | 'Jet' |
         #'Hot' | 'Blackbody' | 'Earth' | 'Electric' | 'Viridis' |
-        colorscale='YlGnBu',
+        colorscale='Rainbow',
         reversescale=True,
         color=[],
-        size=10,
+        size=100,
         colorbar=dict(
             thickness=15,
             title='Node Connections',
@@ -55,15 +63,13 @@ node_trace = go.Scatter(
         line=dict(width=2)))
 
 for node in G.nodes():
-    x, y = G.node[node]['pos']
-    node_trace['x'] += tuple([x])
-    node_trace['y'] += tuple([y])
+		x, y = G.node[node]['pos']
+		node_trace['x'] += tuple([x])
+		node_trace['y'] += tuple([y])
+		node_trace['marker']['color']+=tuple([int(node_groups[int(str(node))])])
+		node_info = 'Connected Group: '+str(node_groups[int(str(node))])
+		node_trace['text']+=tuple([node_info])
 
-
-for node, adjacencies in enumerate(G.adjacency()):
-    node_trace['marker']['color']+=tuple([len(adjacencies[1])])
-    node_info = '# of connections: '+str(len(adjacencies[1]))
-    node_trace['text']+=tuple([node_info])
 
 fig = go.Figure(data=[edge_trace, node_trace],
              layout=go.Layout(

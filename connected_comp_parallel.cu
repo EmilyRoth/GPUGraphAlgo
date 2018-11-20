@@ -45,24 +45,32 @@ __global__ void init_labels(int* labels) {
 }
 
 void print_labels(int* labels, int size) {
+		ofstream myfile ("cuda_output.group");
     cout << "labels: ";
     for (int i = 0; i < size; i++) {
         cout << labels[i] << " ";
+        myfile << labels[i] << " ";
     }
     cout << endl;
+		myfile << endl;
 }
 
 void print_lists(int* adj_lists, int size, int* list_sizes) {
+		ofstream myfile ("cuda_output.adjlist");
     cout << "adjacency lists:" << endl;
     int* list = adj_lists;
     for (int i = 0; i < size; i++) {
         cout << "[";
+				myfile << i << " ";
         for (int j = 0; j < list_sizes[i]; j++) {
             cout << " " << list[j] << " ";
+						myfile << list[j]  << " ";
         }
         cout << "]" << endl;
+				myfile << endl;
         list += list_sizes[i];
     }
+		myfile.close();	
 }
 // void print_debug(int* debug, int size) {
 //     cout << "debug: ";
@@ -150,10 +158,19 @@ int main() {
     // adj_lists[0] = list0;
     // adj_lists[1] = list1;
     // adj_lists[2] = list2;
+
+		/* Simple Test
+
     int adj_lists[4] = {1, 2, 0, 0};
 
     int size = 4;
     int sizes[4] = {2, 1, 1, 0};
+		*/
+
+		int adj_lists[20] = {1, 2, 0, 3, 0, 3, 1, 2, 5, 4, 7, 8, 6, 10, 6, 9, 10, 8, 7, 8};
+
+    int size = 11;
+    int sizes[11] = {2, 2, 2, 2, 1, 1, 2, 2, 3, 1, 2};
 
     print_lists(adj_lists, size, sizes);
 
