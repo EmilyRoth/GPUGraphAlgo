@@ -1,1 +1,2 @@
+nvcc -arch=compute_35 -code=sm_35 -o connected_comp_parallel connected_comp_parallel.cu
 sbatch all_batch
