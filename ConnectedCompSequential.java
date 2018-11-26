@@ -8,8 +8,19 @@ public class ConnectedCompSequential {
 	static boolean [] visited = {false,false,false,false,false,false,false,false,false,false,false};
 
 	public static void main (String [] args) {
-		while(checkDone())
-			doDFS(0);
+		int count = 0;
+		while(!checkDone()) {
+			int search = 0;
+			for(int i = 0; i < visited.length; i++) {
+				if(!visited[i]) {
+					search = i;
+				}
+			}
+
+			doDFS(search);
+			count ++;
+		}
+		System.out.println("" + count);
 	}
 
 	public static void doDFS(int v) {
@@ -18,9 +29,9 @@ public class ConnectedCompSequential {
 		// for all edges from v to w in G.adjacentEdges(v) do
 		for (int i = 0; i < sizes[v]; i++)
 			// if vertex w is not labeled as discovered then
-			if(!visited[adj_lists[i]])
+			if(!visited[adj_lists[v + i]])
 				// recursively call DFS(G,w)
-				doDFS(adj_lists[i]);
+				doDFS(adj_lists[v + i]);
 	}
 
 	public static boolean checkDone() {
