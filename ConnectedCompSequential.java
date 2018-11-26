@@ -1,3 +1,32 @@
-public class connected_comp_sequential {
-	
+public class ConnectedCompSequential {
+
+	//test 1, matching cu files
+	static int [] adj_lists = {1, 2, 0, 3, 0, 3, 1, 2, 5, 4, 7, 8, 6, 10, 6, 9, 10, 8, 7, 8};
+	static int [] sizes = {2, 2, 2, 2, 1, 1, 2, 2, 3, 1, 2};
+	static int vertices = 11;
+
+	static boolean [] visited = {false,false,false,false,false,false,false,false,false,false,false};
+
+	public static void main (String [] args) {
+		while(checkDone())
+			doDFS(0);
+	}
+
+	public static void doDFS(int v) {
+		// label v as discovered
+		visited[v] = true;
+		// for all edges from v to w in G.adjacentEdges(v) do
+		for (int i = 0; i < sizes[v]; i++)
+			// if vertex w is not labeled as discovered then
+			if(!visited[adj_lists[i]])
+				// recursively call DFS(G,w)
+				doDFS(adj_lists[i]);
+	}
+
+	public static boolean checkDone() {
+		for(boolean node : visited)
+			if(!node)
+				return node;
+		return true;
+	}
 }
