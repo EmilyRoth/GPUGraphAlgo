@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.io.PrintWriter;
 
 public class ConnectedCompSequential {
 
@@ -28,6 +29,8 @@ public class ConnectedCompSequential {
 			count ++;
 		}
 		System.out.println("" + count + " " + Arrays.toString(output));
+
+		printToFile();
 	}
 
 	public static void doDFS(int v, int color) {
@@ -58,5 +61,17 @@ public class ConnectedCompSequential {
 			offset += sizes[i];
 		}
 		return offset;
+	}
+
+	public static void printToFile() {
+		try {
+			PrintWriter writer = new PrintWriter("sequential_out.group", "UTF-8");
+			for (int i = 0; i < output.length; i++) {
+				writer.print(output[i] + " ");
+			}
+			writer.close();
+		} catch(Exception e) {
+			System.err.println("Something went wrong: " + e);
+		}
 	}
 }
