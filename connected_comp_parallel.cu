@@ -7,6 +7,8 @@
 #include <string>
 using namespace std;
 
+#define STD_TEST false
+
 
 using namespace std;
 
@@ -127,8 +129,8 @@ void cc_para(int* adj_lists, int size, int* list_sizes) {
     free(labels); free(changed);
 }
 
-int populate_array(vector<int>* arr, int* len) {
-    ifstream infile( "inp.txt" );
+int populate_array(vector<int>* arr, int* len, string file_name) {
+    ifstream infile(file_name.c_str());
     if (!infile.is_open()) {
         cout<<"File failed to open"<<endl;
         return 0;
@@ -167,12 +169,28 @@ int main() {
     int sizes[4] = {2, 1, 1, 0};
 		*/
 
-		int adj_lists[20] = {1, 2, 0, 3, 0, 3, 1, 2, 5, 4, 7, 8, 6, 10, 6, 9, 10, 8, 7, 8};
+		if(STD_TEST){
+			int adj_lists[20] = {1, 2, 0, 3, 0, 3, 1, 2, 5, 4, 7, 8, 6, 10, 6, 9, 10, 8, 7, 8};
 
-    int size = 11;
-    int sizes[11] = {2, 2, 2, 2, 1, 1, 2, 2, 3, 1, 2};
+    	int size = 11;
+    	int sizes[11] = {2, 2, 2, 2, 1, 1, 2, 2, 3, 1, 2};
 
-    print_lists(adj_lists, size, sizes);
+    	print_lists(adj_lists, size, sizes);
 
-    cc_para(adj_lists, size, sizes);
+    	cc_para(adj_lists, size, sizes);
+		}
+		else{
+			vector<int> adj_lists;
+			vector<int> size_lists;
+			int adj_list_len;
+			int size_list_len;
+			populate_array(&adj_lists,&adj_list_len,"rand_graph.list_vec");	
+			populate_array(&size_lists,&size_list_len,"rand_graph.size_vec");
+
+			cout << adj_list_len << endl;
+
+			print_lists(adj_lists.data(), size_list_len, size_lists.data());
+
+			cc_para(adj_lists.data(), size_list_len, size_lists.data());
+		}
 }
