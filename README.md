@@ -49,6 +49,9 @@ Represents a graph with Adjacency List:
 8 6 9 
 9 8
 10 7 8 
+ The plotly for this looks like: 
+
+![alt text](plotlyExample.png)
 
 # Test Case 2
     int adj_lists[16] = {1, 8, 0, 8, 4, 7, 9, 2, 7, 9, 7, 4, 6, 1, 3, 5};
@@ -69,4 +72,16 @@ Represents graph with Adjacency List:
 
 #Graph
 ![alt text](GraphAlgoChart.png)
+
+#Video Example
+https://www.youtube.com/watch?v=2C0BtW2tGWw&feature=youtu.be
+
+#BONUS!
+We also built a random graph generator that you can use as input to the connected_comp_parallel.cu. All you have to do is
+
+	1. Change line 10 of connected_comp_parallel.cu to #define STD_TEST false
+	2. Run gen_random_graph.py
+	3. Do the same steps as above
+	4. Enjoy your random plotly graph
+
 
