@@ -167,10 +167,17 @@ int main() {
     int sizes[4] = {2, 1, 1, 0};
 		*/
 
-		int adj_lists[20] = {1, 2, 0, 3, 0, 3, 1, 2, 5, 4, 7, 8, 6, 10, 6, 9, 10, 8, 7, 8};
+	int adj_lists[20] = {1, 2, 0, 3, 0, 3, 1, 2, 5, 4, 7, 8, 6, 10, 6, 9, 10, 8, 7, 8};
 
     int size = 11;
     int sizes[11] = {2, 2, 2, 2, 1, 1, 2, 2, 3, 1, 2};
+
+    // another test (passed btw)
+
+    // int adj_lists[16] = {1, 8, 0, 8, 4, 7, 9, 2, 7, 9, 7, 4, 6, 1, 3, 5};
+
+    // int size = 10;
+    // int sizes[10] = {2, 2, 2, 1, 2, 1, 1, 2, 1, 2};    
 
     print_lists(adj_lists, size, sizes);
 
