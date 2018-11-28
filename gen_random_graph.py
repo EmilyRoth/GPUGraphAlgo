@@ -9,10 +9,13 @@ for line in nx.generate_adjlist(g):
 	if(count != 0):
 		size_vec.write(",")
 	size_vec.write(str(len(line.split(" "))))
+	numline = 0
 	for num in line.split(" "):
 		if(count != 0):
 			list_vec.write(",")	
-		list_vec.write(str(num))
+		if(numline != 0):
+			list_vec.write(str(num))
+		numline+=1
 		count+=1
 
 list_vec.write('\n')
