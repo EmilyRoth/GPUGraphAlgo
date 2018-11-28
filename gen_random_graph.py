@@ -15,5 +15,7 @@ for line in nx.generate_adjlist(g):
 		list_vec.write(str(num))
 		count+=1
 
+list_vec.write('\n')
+size_vec.write('\n')
 list_vec.close()
 size_vec.close()

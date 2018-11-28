@@ -145,10 +145,13 @@ int populate_array(vector<int>* arr, int* len, string file_name) {
             if (!getline(ss, s, ',')) break;
 
             (*len)++;
+						cout << " " << atoi(s.c_str());
             arr->push_back(atoi(s.c_str()));
 
         }
+				cout << endl;
     }
+		infile.close();
     return 1;
 }
 
@@ -182,15 +185,16 @@ int main() {
 		else{
 			vector<int> adj_lists;
 			vector<int> size_lists;
-			int adj_list_len;
-			int size_list_len;
+			int adj_list_len = 0;
+			int size_list_len = 0;
 			populate_array(&adj_lists,&adj_list_len,"rand_graph.list_vec");	
 			populate_array(&size_lists,&size_list_len,"rand_graph.size_vec");
 
-			cout << adj_list_len << endl;
+			int* adj_lists_data = adj_lists.data();
+			int* size_lists_data = size_lists.data();
 
-			print_lists(adj_lists.data(), size_list_len, size_lists.data());
+			print_lists(adj_lists_data, size_list_len, size_lists_data);
 
-			cc_para(adj_lists.data(), size_list_len, size_lists.data());
+			cc_para(adj_lists_data, size_list_len, size_lists_data);
 		}
 }
