@@ -4,15 +4,21 @@ import java.io.PrintWriter;
 public class ConnectedCompSequential {
 
 	//test 1, matching cu files
-	static int [] adj_lists = {1, 2, 0, 3, 0, 3, 1, 2, 5, 4, 7, 8, 6, 10, 6, 9, 10, 8, 7, 8};
-	static int [] sizes = {2, 2, 2, 2, 1, 1, 2, 2, 3, 1, 2};
-	static int vertices = 11;
+	// static int [] adj_lists = {1, 2, 0, 3, 0, 3, 1, 2, 5, 4, 7, 8, 6, 10, 6, 9, 10, 8, 7, 8};
+	// static int [] sizes = {2, 2, 2, 2, 1, 1, 2, 2, 3, 1, 2};
+	// static int vertices = 11;
 
-	static boolean [] visited = {false,false,false,false,false,false,false,false,false,false,false};
+	static int adj_lists[] = {1, 8, 0, 8, 4, 7, 9, 2, 7, 9, 7, 4, 6, 1, 3, 5};
+
+	static int vertices = 10;
+	static int sizes[] = {2, 2, 2, 1, 2, 1, 1, 2, 1, 2};
+
+	static boolean [] visited = {false,false,false,false,false,false,false,false,false,false};
 
 	static int [] output = new int[vertices];
 
 	public static void main (String [] args) {
+		long startTime = System.currentTimeMillis();
 
 		int count = 0;
 		while(!checkDone()) {
@@ -29,6 +35,9 @@ public class ConnectedCompSequential {
 			count ++;
 		}
 		System.out.println("" + count + " " + Arrays.toString(output));
+
+		long totalTime = System.currentTimeMillis() - startTime;
+		System.out.println("Elapsed time: " + totalTime);
 
 		printToFile();
 	}

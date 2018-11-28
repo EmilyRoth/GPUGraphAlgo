@@ -2,6 +2,7 @@
 📈📉💹
 
 # How to Run
+https://docs.google.com/document/d/1dyYNfk_oiqjokQn-MZSIwO50fQ4di4hk6GTc1xdD9Fc/edit
 $ module load gcc/4.9.3  cuda/8.0  cudnn/5.1
 $ module load python3
 $ pip3 install networkx --user
