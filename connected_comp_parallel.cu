@@ -7,7 +7,7 @@
 #include <string>
 using namespace std;
 
-#define STD_TEST false
+#define STD_TEST true
 
 
 using namespace std;
