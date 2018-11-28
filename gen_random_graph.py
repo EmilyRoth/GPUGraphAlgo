@@ -8,7 +8,7 @@ count = 0
 for line in nx.generate_adjlist(g):
 	if(count != 0):
 		size_vec.write(",")
-	size_vec.write(str(len(line.split(" "))))
+	size_vec.write(str(len(line.split(" "))-1))
 	numline = 0
 	for num in line.split(" "):
 		if(count != 0):
