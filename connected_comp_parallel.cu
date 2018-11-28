@@ -5,10 +5,14 @@
 #include "vector"
 #include <sstream>
 #include <string>
+#include <iostream>
+#include <chrono>
+
 using namespace std;
 
 
 using namespace std;
+using Time = std::chrono::high_resolution_clock;
 
 __global__ void befriend_adjacents(int* adj_lists, int* sizes, int* labels, int* changed) {
     int id = threadIdx.x;
@@ -181,5 +185,9 @@ int main() {
 
     print_lists(adj_lists, size, sizes);
 
+    auto start_time = Time::now();
     cc_para(adj_lists, size, sizes);
+    auto end_time = Time::now();
+    auto time_elapsed = std::chrono::duration<double, std::milli>(end_time-start_time).count();
+    std::cout << "Program executed in " << time_elapsed << "ms";
 }
