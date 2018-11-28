@@ -5,14 +5,12 @@
 #include "vector"
 #include <sstream>
 #include <string>
-#include <iostream>
-#include <chrono>
-
 using namespace std;
 
+#define STD_TEST true
+
 
 using namespace std;
-using Time = std::chrono::high_resolution_clock;
 
 __global__ void befriend_adjacents(int* adj_lists, int* sizes, int* labels, int* changed) {
     int id = threadIdx.x;
@@ -131,8 +129,8 @@ void cc_para(int* adj_lists, int size, int* list_sizes) {
     free(labels); free(changed);
 }
 
-int populate_array(vector<int>* arr, int* len) {
-    ifstream infile( "inp.txt" );
+int populate_array(vector<int>* arr, int* len, string file_name) {
+    ifstream infile(file_name.c_str());
     if (!infile.is_open()) {
         cout<<"File failed to open"<<endl;
         return 0;
@@ -171,23 +169,28 @@ int main() {
     int sizes[4] = {2, 1, 1, 0};
 		*/
 
-	int adj_lists[20] = {1, 2, 0, 3, 0, 3, 1, 2, 5, 4, 7, 8, 6, 10, 6, 9, 10, 8, 7, 8};
+		if(STD_TEST){
+			int adj_lists[20] = {1, 2, 0, 3, 0, 3, 1, 2, 5, 4, 7, 8, 6, 10, 6, 9, 10, 8, 7, 8};
 
-    int size = 11;
-    int sizes[11] = {2, 2, 2, 2, 1, 1, 2, 2, 3, 1, 2};
+    	int size = 11;
+    	int sizes[11] = {2, 2, 2, 2, 1, 1, 2, 2, 3, 1, 2};
 
-    // another test (passed btw)
+    	print_lists(adj_lists, size, sizes);
 
-    // int adj_lists[16] = {1, 8, 0, 8, 4, 7, 9, 2, 7, 9, 7, 4, 6, 1, 3, 5};
+    	cc_para(adj_lists, size, sizes);
+		}
+		else{
+			vector<int> adj_lists;
+			vector<int> size_lists;
+			int adj_list_len;
+			int size_list_len;
+			populate_array(&adj_lists,&adj_list_len,"rand_graph.list_vec");	
+			populate_array(&size_lists,&size_list_len,"rand_graph.size_vec");
 
-    // int size = 10;
-    // int sizes[10] = {2, 2, 2, 1, 2, 1, 1, 2, 1, 2};    
+			cout << adj_list_len << endl;
 
-    print_lists(adj_lists, size, sizes);
+			print_lists(adj_lists.data(), size_list_len, size_lists.data());
 
-    auto start_time = Time::now();
-    cc_para(adj_lists, size, sizes);
-    auto end_time = Time::now();
-    auto time_elapsed = std::chrono::duration<double, std::milli>(end_time-start_time).count();
-    std::cout << "Program executed in " << time_elapsed << "ms";
+			cc_para(adj_lists.data(), size_list_len, size_lists.data());
+		}
 }
